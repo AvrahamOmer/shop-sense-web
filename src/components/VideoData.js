@@ -3,16 +3,32 @@ import OverLappingInput from "./OverLappingInput";
 
 function VideoData() {
   const [enteredVideoName, setenteredVideoName] = useState("");
+  const [componentCount, setComponentCount] = useState(1);
+
   const videoNameChangeHandler = (event) => {
     setenteredVideoName(event.target.value);
-    // setUserInput({
-    //   ...userInput,
-    //   enteredTitle: event.target.value,
-    // });
-    // setUserInput((prevState) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
   };
+
+  const addComponent = () => {
+    setComponentCount((prev) => {
+      return prev + 1;
+    });
+  };
+
+  const saveOverLappingData = (overLappingObject) => {
+    console.log(overLappingObject);
+  };
+
+  const components = [];
+  for (let i = 0; i < componentCount; i++) {
+    components.push(
+      <OverLappingInput
+        onSaveOverLappingData={saveOverLappingData}
+        id={i}
+        key={i}
+      />
+    );
+  }
 
   return (
     <div className="">
@@ -25,7 +41,10 @@ function VideoData() {
           onChange={videoNameChangeHandler}
         />
       </div>
-      <OverLappingInput />
+      {components}
+      <button className="btn btn-primary" onClick={addComponent}>
+        Add One More
+      </button>
     </div>
   );
 }

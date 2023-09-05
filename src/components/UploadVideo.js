@@ -18,7 +18,7 @@ function UploadVideo() {
   };
 
   return (
-    <div>
+    <div className="d-grid gap-2 col-6 mx-auto">
       <input
         ref={inputRef}
         className="VideoInput_input"
@@ -26,11 +26,18 @@ function UploadVideo() {
         onChange={handleFileChange}
         accept=".mov,.mp4"
       />
-      {!source && <button onClick={handleChoose}>Choose</button>}
+      {!source && (
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={handleChoose}
+        >
+          Choose Video
+        </button>
+      )}
       {source && (
         <video className="" width="100%" height={300} controls src={source} />
       )}
-      <div className="">{source || "Nothing selectd"}</div>
     </div>
   );
 }
