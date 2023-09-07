@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import "./UploadVideo.css";
 
-function UploadVideo() {
+function UploadVideo(props) {
   const inputRef = useRef();
 
   const [source, setSource] = useState();
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
     const url = URL.createObjectURL(file);
+    props.onUploadVidoe(file);
     setSource(url);
   };
 

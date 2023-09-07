@@ -1,34 +1,20 @@
 import React, { useState } from "react";
 import OverLappingInput from "./OverLappingInput";
+import OverLappingData from "./OverLappingData";
 
-function VideoData() {
-  const [enteredVideoName, setenteredVideoName] = useState("");
-  const [componentCount, setComponentCount] = useState(1);
+function VideoData(props) {
+  const [overLappingList, setOverLappingList] = useState([]);
 
   const videoNameChangeHandler = (event) => {
-    setenteredVideoName(event.target.value);
+    props.onSaveVideoName(event.target.value);
   };
 
-  const addComponent = () => {
-    setComponentCount((prev) => {
-      return prev + 1;
+  const addOverLappingHandler = (overLapping) => {
+    setOverLappingList((prevOverLappingList) => {
+      return [...prevOverLappingList, overLapping];
     });
+    props.onSaveVideoOverLapping(overLapping);
   };
-
-  const saveOverLappingData = (overLappingObject) => {
-    console.log(overLappingObject);
-  };
-
-  const components = [];
-  for (let i = 0; i < componentCount; i++) {
-    components.push(
-      <OverLappingInput
-        onSaveOverLappingData={saveOverLappingData}
-        id={i}
-        key={i}
-      />
-    );
-  }
 
   return (
     <div className="">
@@ -36,15 +22,19 @@ function VideoData() {
         <input
           type="text"
           className="form-control"
-          placeholder="Vidoe Name"
-          aria-label="Vidoe Name"
+          placeholder="Video Name"
+          aria-label="Video Name"
           onChange={videoNameChangeHandler}
         />
       </div>
-      {components}
-      <button className="btn btn-primary" onClick={addComponent}>
-        Add One More
-      </button>
+      <OverLappingInput onAddOverLapping={addOverLappingHandler} />
+      {overLappingList.map((overLapping) => (
+        <OverLappingData
+          key={overLapping.id}
+          name={overLapping.name}
+          coordinate={overLapping.coordinate}
+        />
+      ))}
     </div>
   );
 }
