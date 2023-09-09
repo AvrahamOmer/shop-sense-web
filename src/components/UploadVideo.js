@@ -28,12 +28,11 @@ function UploadVideo(props) {
       />
       {!source && (
         <button
-          className="btn btn-primary"
+          className="Custome-Button btn bi bi-camera-video text-primary"
+          style={{ fontSize: "50px" }}
           type="button"
           onClick={handleChoose}
-        >
-          Choose Video
-        </button>
+        ></button>
       )}
       {source && (
         <video className="" width="100%" height={300} controls src={source} />

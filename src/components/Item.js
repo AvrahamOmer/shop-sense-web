@@ -12,11 +12,10 @@ function Item(props) {
 
   const onSaveVideoOverLappingHandler = (videoOverLapping) => {
     props.onChangeCoordinate(videoOverLapping, props.id);
-    console.log(videoOverLapping);
   };
 
   return (
-    <div className="card">
+    <div className="card shadow-lg p-3 mb-5 bg-white">
       <UploadVideo onUploadVidoe={onSaveVideoHandler} />
       <div className="card-body">
         <VideoData

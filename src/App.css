@@ -1,38 +1,41 @@
-.App {
+header {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header img {
+  width: 12rem;
+  border-radius: 20%;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+header p {
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.Plus-Button {
+  font-size: 10rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Plus-Button:hover {
+  transform: translateY(-2px);
+  transition: sransform 0.2s;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8)
+}
+
+.Custome-Button:hover {
+  transform: translateY(-2px);
+  transition: sransform 0.2s;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
 }

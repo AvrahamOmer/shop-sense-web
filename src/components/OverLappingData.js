@@ -1,9 +1,10 @@
 function overLappingData(props) {
   return (
-    <div className="">
-      <p>Overlapping name: {props.name}</p>
-      <p>Overlapping coordinate: {props.coordinate}</p>
-    </div>
+    <tr>
+      <th scope="row">{props.id}</th>
+      <td>{props.name}</td>
+      <td>{props.coordinate}</td>
+    </tr>
   );
 }
 

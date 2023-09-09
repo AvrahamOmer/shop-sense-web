@@ -28,13 +28,25 @@ function VideoData(props) {
         />
       </div>
       <OverLappingInput onAddOverLapping={addOverLappingHandler} />
-      {overLappingList.map((overLapping) => (
-        <OverLappingData
-          key={overLapping.id}
-          name={overLapping.name}
-          coordinate={overLapping.coordinate}
-        />
-      ))}
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Video Name</th>
+            <th scope="col">Coordinates</th>
+          </tr>
+        </thead>
+        <tbody>
+          {overLappingList.map((overLapping) => (
+            <OverLappingData
+              key={overLapping.id}
+              id={overLapping.id}
+              name={overLapping.name}
+              coordinate={overLapping.coordinate}
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

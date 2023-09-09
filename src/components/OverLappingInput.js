@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function OverLappingInput(props) {
   const [overLappingName, setOverLappingName] = useState("");
   const [overLappingCoordinate, setOverLappingCoordinate] = useState("");
+  const [currentId, setCurrentId] = useState(1);
 
   const handleNameChange = (event) => {
     setOverLappingName(event.target.value);
@@ -16,11 +17,12 @@ function OverLappingInput(props) {
     event.preventDefault();
 
     const overLappingData = {
-      id: Math.random(),
+      id: currentId,
       name: overLappingName,
       coordinate: overLappingCoordinate,
     };
     props.onAddOverLapping(overLappingData);
+    setCurrentId((Prev) => Prev + 1);
     setOverLappingName("");
     setOverLappingCoordinate("");
   };
@@ -40,15 +42,19 @@ function OverLappingInput(props) {
         <input
           type="text"
           className="form-control"
-          placeholder="Coordinate"
-          aria-label="Coordinate"
+          placeholder="Coordinates"
+          aria-label="Coordinates"
           value={overLappingCoordinate}
           onChange={handleCoordinateChange}
         />
       </div>
-      <button className="btn btn-primary" type="submit">
-        Add One More
-      </button>
+      <div className="text-center">
+        <button
+          className="Custome-Button btn bi bi-plus-square text-primary"
+          style={{ fontSize: "50px" }}
+          type="submit"
+        ></button>
+      </div>
     </form>
   );
 }

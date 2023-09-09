@@ -1,11 +1,14 @@
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import logo from "./assets/logo.png";
+import "./App.css";
 import Item from "./components/Item";
 import React, { useState } from "react";
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
 function App() {
-  const [dataStore, setDataStore] = useState([{}, {}]);
+  const [dataStore, setDataStore] = useState([{}]);
 
   const updateName = (name, index) => {
     return setDataStore((prevDataStore) => {
@@ -61,7 +64,11 @@ function App() {
 
   return (
     <div>
-      <h1>Shop Sense</h1>
+      <header>
+        <img src={logo} alt="Medal badge with a star" />
+        <h1>Sense, Analyze, Succeed</h1>
+        <p>Unleash the Power of AI Analytics for Your Store's Success</p>
+      </header>
       <div className="container">
         <div className="row">
           {dataStore.map((item, index) => {
@@ -77,14 +84,19 @@ function App() {
               </div>
             );
           })}
+          <div className="col-sm-6 text-center">
+            <button
+              className="Plus-Button btn bi bi-plus-square text-primary"
+              onClick={addAnotherItem}
+            ></button>
+          </div>
         </div>
       </div>
-      <button className="btn btn-primary" onClick={sendData}>
-        submit
-      </button>
-      <button className="btn btn-primary" onClick={addAnotherItem}>
-        Add Another Item
-      </button>
+      <div className="container text-center">
+        <button className="btn btn-primary btn-lg" onClick={sendData}>
+          Get Results
+        </button>
+      </div>
     </div>
   );
 }
