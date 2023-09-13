@@ -1,38 +1,3 @@
-header {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 3rem;
-  text-align: center;
-}
-
-header img {
-  width: 12rem;
-  border-radius: 20%;
-
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-header p {
-  margin: 0;
-}
-
-.Plus-Button {
-  font-size: 10rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.Plus-Button:hover {
-  transform: translateY(-2px);
-  transition: sransform 0.2s;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8)
-}
 
 .Custome-Button:hover {
   transform: translateY(-2px);

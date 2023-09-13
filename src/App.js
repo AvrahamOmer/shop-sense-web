@@ -1,102 +1,96 @@
+import React, { useState } from "react";
+import JSZip from "jszip";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import logo from "./assets/logo.png";
 import "./App.css";
-import Item from "./components/Item";
-import React, { useState } from "react";
+import Header from "./components/Header";
+import CollectDataPage from "./components/CollectDataPage";
+import DisplayDataPage from "./components/DisplayDataPage";
+// import DisplayDataPage from "./components/DisplayDataPage";
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 
 function App() {
   const [dataStore, setDataStore] = useState([{}]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [videoUrls, setVideoUrls] = useState([]);
 
-  const updateName = (name, index) => {
-    return setDataStore((prevDataStore) => {
-      return [
-        ...prevDataStore.slice(0, index),
-        {
-          ...prevDataStore[index],
-          name: name,
-        },
-        ...prevDataStore.slice(index + 1),
-      ];
+  const sendData = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    const formData = new FormData();
+    dataStore.forEach((item, index) => {
+      formData.append(`file${index}`, item.file);
+      let dataInfo = {
+        name: item.name,
+        overlapping: item.overlapping,
+      };
+      formData.append(`data${index}`, JSON.stringify(dataInfo));
     });
+
+    try {
+      const response = await fetch("http://localhost:5000/api/get_data", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const zipData = await response.blob();
+      const zip = await JSZip.loadAsync(zipData);
+      const videoUrls = [];
+
+      await Promise.all(
+        Object.values(zip.files).map(async (file) => {
+          if (file.name.endsWith(".mp4")) {
+            const videoData = await file.async("blob");
+            const videoUrl = URL.createObjectURL(videoData);
+            videoUrls.push(videoUrl);
+          }
+        })
+      );
+
+      setVideoUrls(videoUrls);
+      console.log(videoUrls);
+    } catch (error) {
+      setError(error.message);
+    }
+    setIsLoading(false);
   };
 
-  const updateFile = (file, index) => {
-    return setDataStore((prevDataStore) => {
-      return [
-        ...prevDataStore.slice(0, index),
-        {
-          ...prevDataStore[index],
-          file: file,
-        },
-        ...prevDataStore.slice(index + 1),
-      ];
-    });
-  };
+  let content = (
+    <CollectDataPage
+      dataStore={dataStore}
+      setDataStore={setDataStore}
+      sendData={sendData}
+    />
+  );
 
-  const updateCoordinate = (coordinateObject, index) => {
-    return setDataStore((prevDataStore) => {
-      return [
-        ...prevDataStore.slice(0, index),
-        {
-          ...prevDataStore[index],
-          overlapping: {
-            ...prevDataStore[index].overlapping,
-            [coordinateObject.name]: coordinateObject.coordinate,
-          },
-        },
-        ...prevDataStore.slice(index + 1),
-      ];
-    });
-  };
+  if (error) {
+    content = <p>{error}</p>;
+  }
 
-  const sendData = () => {
-    console.log(dataStore);
-  };
+  if (isLoading) {
+    content = (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
-  const addAnotherItem = () => {
-    setDataStore((prevDataStore) => {
-      return [...prevDataStore, {}];
-    });
-  };
+  if (videoUrls.length > 0) {
+    console.log(videoUrls);
+    content = <DisplayDataPage videos={videoUrls} />;
+  }
 
   return (
     <div>
-      <header>
-        <img src={logo} alt="Medal badge with a star" />
-        <h1>Sense, Analyze, Succeed</h1>
-        <p>Unleash the Power of AI Analytics for Your Store's Success</p>
-      </header>
-      <div className="container">
-        <div className="row">
-          {dataStore.map((item, index) => {
-            return (
-              <div className="col-sm-6">
-                <Item
-                  key={index}
-                  id={index}
-                  onChangeName={updateName}
-                  onChangeFile={updateFile}
-                  onChangeCoordinate={updateCoordinate}
-                />
-              </div>
-            );
-          })}
-          <div className="col-sm-6 text-center">
-            <button
-              className="Plus-Button btn bi bi-plus-square text-primary"
-              onClick={addAnotherItem}
-            ></button>
-          </div>
-        </div>
-      </div>
-      <div className="container text-center">
-        <button className="btn btn-primary btn-lg" onClick={sendData}>
-          Get Results
-        </button>
-      </div>
+      <Header />
+      <div className="container">{content}</div>
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.Plus-Button {
+    font-size: 10rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.Plus-Button:hover {
+    transform: translateY(-2px);
+    transition: sransform 0.2s;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8)
+}
