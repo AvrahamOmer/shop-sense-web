@@ -1,6 +1,7 @@
 import React from "react";
 import Item from "./Item";
 import PlusButton from "./PlusButton";
+import WalkThrough from "./WalkThrough";
 
 function ItemList(props) {
   const { dataStore, setDataStore } = props;
@@ -49,6 +50,8 @@ function ItemList(props) {
 
   return (
     <div className="row">
+      <WalkThrough />
+
       {dataStore.map((_, index) => {
         return (
           <div className="col-sm-6">
