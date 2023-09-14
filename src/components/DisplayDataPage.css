@@ -1,0 +1,9 @@
+.chart:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s;
+    box-shadow: 0 2px 30px rgba(119, 180, 211, 0.4);
+  }
+
+  .row-video {
+    flex-direction: row-reverse;
+  }

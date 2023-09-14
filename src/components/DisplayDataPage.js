@@ -1,58 +1,46 @@
 import React, { useEffect, useRef } from "react";
+import Chart from "chart.js/auto";
+import { CategoryScale } from "chart.js";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
+import "./DisplayDataPage.css";
+
+Chart.register(CategoryScale);
 
 function DisplayDataPage(props) {
-  const myObjectString = JSON.stringify(props.data, null, 2);
-
-  const videoEl = useRef(null);
-
-  const attemptPlay = () => {
-    videoEl &&
-      videoEl.current &&
-      videoEl.current.play().catch((error) => {
-        if (
-          error.name === "NotAllowedError" ||
-          error.name === "NotSupportedError"
-        ) {
-          console.log("Error attempting to play", error);
-        } else if (error.name === "AbortError") {
-          attemptPlay();
-        }
-      });
-  };
-
-  useEffect(() => {
-    attemptPlay();
-  }, []);
+  const { videos, data } = props;
 
   return (
-    <div
-      className="container"
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <div className="row align-items-center">
-        {props.videos.map((videoPath, index) => {
+    <div className="container overflow-hidden text-center">
+      <div className="row justify-content-center row-video">
+        {videos.map((videoPath, index) => {
           return (
-            <div
-              className="col"
-              key={index}
-              style={{ display: "flex", justifyContent: "center", margin: "0" }}
-            >
+            <div className="col-6" key={index}>
               <video
-                style={{ maxWidth: "57%", width: "800px", margin: "0 auto" }}
+                key={index}
+                style={{ Width: "100%", height: "40rem" }}
                 playsInline
                 loop
                 muted
                 controls
+                autoPlay
                 typeof="video/mp4"
                 alt="All the devices"
+                s
                 src={videoPath}
-                ref={videoEl}
               />
             </div>
           );
         })}
       </div>
-      <pre>{myObjectString}</pre>
+      <div className="row justify-content-around">
+        <div className="col-4 card chart">
+          <LineChart />
+        </div>
+        <div className="col-4 card chart">
+          <BarChart />
+        </div>
+      </div>
     </div>
   );
 }

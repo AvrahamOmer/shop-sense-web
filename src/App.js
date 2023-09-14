@@ -94,6 +94,7 @@ function App() {
     <div>
       <Header />
       <div className="container">{content}</div>
+      {/* <DisplayDataPage /> */}
     </div>
   );
 }
