@@ -21,6 +21,7 @@ function DisplayDataPage(props) {
   useEffect(() => {
     attemptPlay();
   }, []);
+
   return (
     <div
       className="container"
@@ -35,7 +36,7 @@ function DisplayDataPage(props) {
               style={{ display: "flex", justifyContent: "center", margin: "0" }}
             >
               <video
-                style={{ maxWidth: "70%", width: "800px", margin: "0 auto" }}
+                style={{ maxWidth: "57%", width: "800px", margin: "0 auto" }}
                 playsInline
                 loop
                 muted

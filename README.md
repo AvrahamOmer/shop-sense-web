@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# SHOP SENSE WEB - CLIENT SIDE
+
+## ABOUT
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Welcome to our Client Side README for the Client-Server System! In this document, we'll guide you through the user interface and functionality of the client-side application.
 
-In the project directory, you can run:
+Our client-side application simplifies the process of collecting and annotating videos for your store's surveillance system.
 
-### `npm start`
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="src/assets/readme/full_web_page.png" alt="Alt text" width="500" />
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## HOW TO WORK WITH THE APP
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### User Interface
 
-### `npm test`
+#### Video Upload and Data Form
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Video Upload**: To get started, you'll find a form that allows you to upload a video of the front of your store. Click the "Video Logo" button to select the video file from your device.
 
-### `npm run build`
+- **Video Name**: After uploading the video, enter its name in the provided field.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Overlapping Video**: If you have another video with overlapping content, you can add its name and specify the coordinates of the overlap in the form.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  **Note:** When you are uploading the front camera remember to insert the door coordinates first.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Add Camera**: To include more cameras with overlapping videos, simply click the plus (+) logo. This action will reveal additional fields for you to add another camera and its overlapping video details.
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="src/assets/readme/form.png" alt="Alt text" width="400" />
+</div>
 
-### `npm run eject`
+#### Adding New Forms
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Add Form**: Located next to the video form, you'll find a prominent plus (+) sign. Clicking it will open a new form, allowing you to add more video details for a different location.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="src/assets/readme/plus_logo.png" alt="Alt text" width="150" />
+</div>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Submission
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Get Results**: Once you've completed the necessary video uploads, click the "Get Results" button at the end of the form. This action will send your data to the server for processing.
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="src/assets/readme/get_results.png" alt="Alt text" width="200" />
+</div>
 
-## Learn More
+### Conclusion
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After submitting your data, the server will analyis the data and return:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. The videos with bounding boxes.
+2. A graph showing how many people were in the store in each period of time.
+3. Information about the number of people present in the shop and the AVG duration time.
+4. The duration of time each person spent inside.
 
-### Code Splitting
+If you have any questions or encounter issues, please don't hesitate to contact our support team. Thank you for using our client-side system!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Usage
 
-### Analyzing the Bundle Size
+To work on this project locally, follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Clone the Git repository:
 
-### Making a Progressive Web App
+   ```bash
+   git clone https://github.com/AvrahamOmer/shop-sense-web
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Navigate to the project directory:
 
-### Advanced Configuration
+   ```bash
+   cd SHOP-SENSE-WEB
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3. Install project dependencies:
 
-### Deployment
+   ```bash
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+4. Start the development server:
 
-### `npm run build` fails to minify
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5. Go to the server side to start the server:
+   [SHOP-SENSE-SERVER](https://github.com/AvrahamOmer/Shop-Sense)
+
+---
