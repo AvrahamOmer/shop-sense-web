@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
 function DisplayDataPage(props) {
+  const myObjectString = JSON.stringify(props.data, null, 2);
+
   const videoEl = useRef(null);
 
   const attemptPlay = () => {
@@ -50,6 +52,7 @@ function DisplayDataPage(props) {
           );
         })}
       </div>
+      <pre>{myObjectString}</pre>
     </div>
   );
 }

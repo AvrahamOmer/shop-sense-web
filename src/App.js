@@ -15,7 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [videoUrls, setVideoUrls] = useState([]);
-  const [resData, setResData] = useState({});
+  const [resData, setResData] = useState(null);
 
   const sendData = async () => {
     setIsLoading(true);
@@ -43,24 +43,21 @@ function App() {
       const zip = await JSZip.loadAsync(zipData);
       const videoUrls = [];
 
-      await Promise.all(
-        Object.values(zip.files).map(async (file) => {
+      const files = Object.values(zip.files);
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.name.endsWith(".mp4")) {
           const videoData = await file.async("blob");
-          if (file.name.endsWith(".mp4")) {
-            const videoUrl = URL.createObjectURL(videoData);
-            videoUrls.push(videoUrl);
-          }
-          if (file.name.endsWith(".json")) {
-            const jsonData = await file.async("text");
-            const data = JSON.parse(jsonData);
-            setResData(data);
-          }
-        })
-      );
+          const videoUrl = URL.createObjectURL(videoData);
+          videoUrls.push(videoUrl);
+        } else if (file.name.endsWith(".json")) {
+          const jsonData = await file.async("text");
+          const data = JSON.parse(jsonData);
+          setResData(data);
+        }
+      }
 
       setVideoUrls(videoUrls);
-      console.log(videoUrls);
-      console.log(resData);
     } catch (error) {
       setError(error.message);
     }
@@ -89,9 +86,8 @@ function App() {
     );
   }
 
-  if (videoUrls.length > 0) {
-    console.log(videoUrls);
-    content = <DisplayDataPage videos={videoUrls} />;
+  if (videoUrls.length > 0 && resData) {
+    content = <DisplayDataPage videos={videoUrls} data={resData} />;
   }
 
   return (
