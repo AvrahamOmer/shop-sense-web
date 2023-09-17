@@ -1,15 +1,11 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 
-function BarChart() {
-  const dummyData = {
-    1: 5.67,
-    2: 13.23,
-    3: 10.5,
-  };
+function BarChart(props) {
+  const { timePerId } = props;
 
-  const keysArray = Object.keys(dummyData);
-  const valuesArray = Object.values(dummyData);
+  const keysArray = Object.keys(timePerId);
+  const valuesArray = Object.values(timePerId);
 
   const chartData = {
     labels: keysArray,
@@ -35,6 +31,9 @@ function BarChart() {
             title: {
               display: true,
               text: "Stay Time per ID",
+              font: {
+                size: 20,
+              },
             },
             legend: {
               display: false,

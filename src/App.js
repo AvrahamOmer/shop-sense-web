@@ -4,11 +4,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./App.css";
 import Header from "./components/Header";
-import CollectDataPage from "./components/CollectDataPage";
-import DisplayDataPage from "./components/DisplayDataPage";
-// import DisplayDataPage from "./components/DisplayDataPage";
-// Put any other imports below so that CSS from your
-// components takes precedence over default styles.
+import CollectDataPage from "./components/collectPage/CollectDataPage";
+import DisplayDataPage from "./components/displayPage/DisplayDataPage";
 
 function App() {
   const [dataStore, setDataStore] = useState([{}]);
@@ -94,7 +91,6 @@ function App() {
     <div>
       <Header />
       <div className="container">{content}</div>
-      {/* <DisplayDataPage /> */}
     </div>
   );
 }
